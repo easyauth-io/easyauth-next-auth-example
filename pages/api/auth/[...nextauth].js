@@ -6,7 +6,7 @@ export const authOptions = {
     EasyAuth({
       clientId: process.env.EASYAUTH_CLIENT_ID,
       clientSecret: process.env.EASYAUTH_CLIENT_SECRET,
-      tenantURL: process.env.EASYAUTH_TENANT_URL,
+      tenantURL: process.env.NEXT_PUBLIC_EASYAUTH_TENANT_URL,
     }),
   ],
   secret: "my-secret",
@@ -27,7 +27,7 @@ export const authOptions = {
           const response = await fetch(
             new URL(
               "/tenantbackend/oauth2/token",
-              process.env.EASYAUTH_TENANT_URL
+              process.env.NEXT_PUBLIC_EASYAUTH_TENANT_URL
             ),
             {
               headers: {"Content-Type": "application/x-www-form-urlencoded"},
@@ -58,6 +58,7 @@ export const authOptions = {
       }
     },
     async session({session, token}) {
+      session.user.access_token = token.access_token;
       session.error = token.error;
       return session;
     },

@@ -1,5 +1,6 @@
 import {useSession} from "next-auth/react";
 import {useRouter} from "next/router";
+import {checkRefreshTokenError} from "@/util/checkRefreshTokenError";
 
 export default function ProtectedPage() {
   const router = useRouter();

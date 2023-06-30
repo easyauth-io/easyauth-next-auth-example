@@ -1,6 +1,5 @@
 import Head from "next/head";
 import {useSession, signIn, signOut} from "next-auth/react";
-import {useEffect} from "react";
 import {checkRefreshTokenError} from "@/util/checkRefreshTokenError";
 
 export default function Home() {
@@ -21,7 +20,20 @@ export default function Home() {
               {session ? (
                 <>
                   Signed in as {session.user.email} <br />
-                  <button onClick={() => signOut()}>Sign out</button>
+                  <button
+                    onClick={() => {
+                      signOut({redirect: false}).then(() => {
+                        // To signout from EasyAuth Tenant.
+                        window.location.assign(
+                          `${
+                            process.env.NEXT_PUBLIC_EASYAUTH_TENANT_URL
+                          }/logout?target=${btoa(window.location.href)}`
+                        );
+                      });
+                    }}
+                  >
+                    Sign out
+                  </button>
                 </>
               ) : (
                 <>
