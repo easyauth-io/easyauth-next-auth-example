@@ -1,6 +1,7 @@
 import Head from "next/head";
 import {useSession, signIn, signOut} from "next-auth/react";
 import {checkRefreshTokenError} from "@/util/checkRefreshTokenError";
+import Link from "next/link";
 
 export default function Home() {
   const {data: session, status} = useSession();
@@ -34,6 +35,9 @@ export default function Home() {
                   >
                     Sign out
                   </button>
+                  <Link href={"/profile"}>
+                    <button>EasyAuth user profile</button>
+                  </Link>
                 </>
               ) : (
                 <>
@@ -41,6 +45,9 @@ export default function Home() {
                   <button onClick={() => signIn("easyauth")}>Sign in</button>
                 </>
               )}
+              <Link href={"/protected"}>
+                <button>Protected page</button>
+              </Link>
             </>
           )}
         </div>

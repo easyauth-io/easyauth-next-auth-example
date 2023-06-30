@@ -2,6 +2,7 @@ import {useSession} from "next-auth/react";
 import {useRouter} from "next/router";
 import React, {useEffect, useState} from "react";
 import {checkRefreshTokenError} from "@/util/checkRefreshTokenError";
+import Link from "next/link";
 
 export default function Profile() {
   const router = useRouter();
@@ -11,7 +12,7 @@ export default function Profile() {
       router.push("/");
     },
   });
-  const [easyAuthProfile, setEasyAuthProfile] = useState({});
+  const [easyAuthProfile, setEasyAuthProfile] = useState(null);
 
   checkRefreshTokenError();
 
@@ -40,9 +41,12 @@ export default function Profile() {
   }
 
   return (
-    <div>
-      <h1>EasyAuth profile</h1>
-      {easyAuthProfile && JSON.stringify(easyAuthProfile)}
+    <div className="hero">
+      <h3>EasyAuth profile</h3>
+      <p>{easyAuthProfile && JSON.stringify(easyAuthProfile)}</p>
+      <Link href={"/"}>
+        <button>Home page</button>
+      </Link>
     </div>
   );
 }
