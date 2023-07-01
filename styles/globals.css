@@ -1,0 +1,20 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5em 0;
+  gap: 2rem;
+  font-size: 1.3rem;
+}
+
+.hero button {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  background-color: rgb(34, 139, 230);
+  color: white;
+}
+
+.hero button:hover {
+  background-color: rgb(21, 110, 188);
+}
